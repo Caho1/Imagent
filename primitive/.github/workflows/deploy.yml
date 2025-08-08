@@ -1,0 +1,47 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.IMAGENT_HOST }}
+          username: ${{ secrets.IMAGENT_USER }}
+          key: ${{ secrets.IMAGENT_SSH_KEY }}
+          port: ${{ secrets.IMAGENT_SSH_PORT || 22 }}
+          script: |
+            set -e
+            cd /opt/imagent/imagent
+            git fetch --all --prune
+            git reset --hard origin/main
+
+            # Backend
+            cd primitive/backend
+            if [ -d .venv ]; then
+              source .venv/bin/activate
+            else
+              python3 -m venv .venv
+              source .venv/bin/activate
+            fi
+            pip install -U pip
+            pip install -r requirements.txt
+
+            # Frontend build and static copy
+            cd ../web
+            npm ci
+            npm run build
+            mkdir -p ../backend/app/static
+            rm -rf ../backend/app/static/*
+            cp -r dist/* ../backend/app/static/
+
+            # Restart service (requires passwordless sudo)
+            sudo -n systemctl restart imagent || systemctl --user restart imagent || true 
