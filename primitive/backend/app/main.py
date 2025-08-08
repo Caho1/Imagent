@@ -16,7 +16,7 @@ from .models import Job, JobStatus, engine, save_job
 from .jobs import create_job, run_job
 from .notifier import notifier
 
-app = FastAPI(title="Primitive Orchestrator API", default_response_class=None)
+app = FastAPI(title="Primitive Orchestrator API")
 
 # CORS
 app.add_middleware(

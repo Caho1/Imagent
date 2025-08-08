@@ -14,7 +14,7 @@ def main() -> None:
     port = int(os.getenv("APP_PORT", "8000"))
     # Enable reload in development or when RELOAD=true
     reload_enabled = os.getenv("APP_ENV", "").lower() == "development" or strtobool(os.getenv("RELOAD", "false"))
-    workers = int(os.getenv("WORKERS", "2"))
+    workers = int(os.getenv("WORKERS", "1"))
     if reload_enabled:
         # uvicorn 不支持 reload+workers>1
         workers = 1
