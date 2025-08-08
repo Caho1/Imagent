@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 
 
@@ -11,7 +11,9 @@ class Settings:
     app_port: int = int(os.getenv("APP_PORT", "8000"))
     data_dir: Path = Path(os.getenv("DATA_DIR", "/data")).resolve()
     serve_static: bool = os.getenv("SERVE_STATIC", "false").lower() == "true"
-    cors_origins: List[str] = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+    cors_origins: List[str] = field(
+        default_factory=lambda: os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+    )
     max_upload_mb: int = int(os.getenv("MAX_UPLOAD_MB", "25"))
 
     @property
