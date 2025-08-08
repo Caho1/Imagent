@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply text-gray-800;
+}
+
+.container-lg {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+/* Decorative dotted pattern background */
+.bg-dots {
+  background-image:
+    radial-gradient(rgba(99,102,241,0.08) 1px, transparent 1px),
+    radial-gradient(rgba(6,182,212,0.07) 1px, transparent 1px);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+}
+
+/* Glass panel style */
+.glass-panel {
+  @apply bg-white/70 backdrop-blur border border-white/60 shadow;
+}
+
+/* Card with subtle gradient border */
+.card {
+  position: relative;
+  border-radius: 0.75rem; /* rounded-xl */
+}
+.card::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(99,102,241,.35), rgba(6,182,212,.25));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.card > .card-body {
+  @apply bg-white/85 backdrop-blur rounded-xl shadow;
+}
+
+/* Gradient text helper */
+.text-gradient {
+  background: linear-gradient(90deg, #4f46e5 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Pill segmented controls */
+.pill-group { @apply inline-flex items-center gap-1 p-1 bg-white/70 rounded-full border; }
+.pill { @apply px-3 py-1.5 rounded-full text-sm cursor-pointer select-none text-gray-700 hover:bg-primary-50; }
+.pill-active { @apply bg-primary-100 text-primary-700 shadow; }
+
+/* Tooltip */
+.tooltip { @apply relative inline-block; }
+.tooltip-content { @apply invisible absolute z-10 translate-y-1 bg-gray-900 text-white text-xs px-2 py-1 rounded; white-space: nowrap; }
+.tooltip:hover .tooltip-content { @apply visible; }
+
+/* Compare slider */
+.compare { position: relative; overflow: hidden; }
+.compare img { display: block; width: auto; max-width: 100%; }
+.compare .overlay { position: absolute; inset: 0; overflow: hidden; }
+.compare .handle { @apply absolute top-1/2 -translate-y-1/2 bg-white shadow rounded-full border; width: 18px; height: 18px; }
+.compare .range { @apply w-full appearance-none bg-transparent; position: absolute; left: 0; bottom: 0; height: 0; }
+.compare .range::-webkit-slider-thumb { @apply appearance-none w-0 h-0; } 

@@ -1,0 +1,19 @@
+# Node
+node_modules/
+web/dist/
+web/.vite/
+
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Data
+backend/app/static/
+/data/
+*.db
+
+# OS
+.DS_Store
+Thumbs.db 

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Primitive AI 图像生成器</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.js"></script>
+
+    <!-- TailwindCSS 3.0+ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#fef2f2',
+                100: '#fee2e2',
+                200: '#fecaca',
+                300: '#fca5a5',
+                400: '#f87171',
+                500: '#ef4444',
+                600: '#dc2626',
+                700: '#b91c1c',
+                800: '#991b1b',
+                900: '#7f1d1d',
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-white font-sans antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html> 
